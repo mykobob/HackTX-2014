@@ -2,8 +2,8 @@
 <head>
 	<style type="text/css">
 		#notification{
-			/*-webkit-animation-duration: 1.5s;
-		  	-webkit-animation-name: slidein;*/
+			-webkit-animation-duration: 1.5s;
+		  	-webkit-animation-name: slidein;
 			/*width: 30%;*/
 		    padding: 1px;
 		    font-family:"Times New Roman";
@@ -12,7 +12,7 @@
 		   /* border: 5px solid gray;*/
 		    margin: 0;
 		}
-		/*@-webkit-keyframes slidein
+		@-webkit-keyframes slidein
 		{
 			from {
 			    margin-left: 30%;
@@ -26,11 +26,11 @@
 		}
 	 
 		 #rollLeft {
-		 	/*width: 1300px;
+		 	/*width: 1300px;*/
 		    font-family:"Times New Roman";
 		    font-size:400%;
 		    background-color: rgba(255,255,255,.5);
-		   /* border: 5px solid gray;
+		   /* border: 5px solid gray;*/
 		    margin: 0;
 		    -webkit-animation-duration: 1.5s;
 		  	-webkit-animation-name: slideLeft; 	
@@ -48,11 +48,11 @@
 		}
 
 		#rollRight {
-			/*width: 1300px;
+			/*width: 1300px;*/
 		    font-family:"Times New Roman";
 		    font-size:400%;
 		    background-color: rgba(255,255,255,.5);
-		   /* border: 5px solid gray;
+		   /* border: 5px solid gray;*/
 		    margin: 0;
 		    -webkit-animation-duration: 1.5s;
 		  	-webkit-animation-name: slideRight;
@@ -71,21 +71,21 @@
 		}
 
 		#rollDown {
-			/*width: 1300px;
+			/*width: 1300px;*/
 	    	font-family:"Times New Roman";
 	    	font-size:400%;
 	    	background-color: rgba(1,1,1,.9);
 	    	color: white;
-	   		/* border: 5px solid gray;
+	   		/* border: 5px solid gray;*/
 	    	margin: 0;
-		}*/	
+		}	
 	</style>
 
 	<script src = "Queue.js"></script>
 	<!--<script src = "http://js.leapmotion.com/leap-0.6.0-beta1.min.js"></script>-->
 </head>
 <body>
-	<div id = "notification"></div>
+	<div id = "notification">Sample Text</div>
 	<script type = "text/javascript">
 		notification = document.getElementById("notification");
 		//notification.style.visibility = "hidden";
@@ -170,7 +170,7 @@
 		function checkQueue() {
 			console.log("queue length = " + queue.getLength());
 			//console.log(notification.style.visibility);
-			if(!queue.isEmpty() && notification.innerHTML==="") {
+			if(!queue.isEmpty() && notification.innerHTML!="") {
 				var display = queue.dequeue();
 				console.log("display = " + display);
 				//display = format(display);
