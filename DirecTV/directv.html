@@ -1,6 +1,11 @@
 <html>
 <head>
 	<script>
+		function sendXMLRequest(url) {
+			var xmlRequest = new XMLHttpRequest();
+			xmlRequest.open("GET", url, true);
+			xmlRequest.send();
+		}
 		function startTV() {
 			var tv = document.getElementById("TV_IP").value;
 			var match = tv.match(/http:\/\/(\d{1,3}\.){3}\d{1,3}:\d+/);
@@ -14,9 +19,7 @@
 				alert("Server IP isn't an IP address!");
 				return;
 			}
-			var xmlRequest = new XMLHttpRequest();
-			xmlRequest.open("GET", tv + "/itv/startURL?url=" + server +"/overlay.html", true);
-			xmlRequest.send();
+			sendXMLRequest(tv + "/itv/startURL?url=" + server +"/overlay.html");
 		}
 
 		function stopTV() {
@@ -27,9 +30,7 @@
 				return;
 			}
 
-			var xmlRequest = new XMLHttpRequest();
-			xmlRequest.open("GET", tv + "/itv/stopITV", true);
-			xmlRequest.send();
+			sendXMLRequest(tv + "/itv/stopITV");
 		}
 	</script>
 </head>
