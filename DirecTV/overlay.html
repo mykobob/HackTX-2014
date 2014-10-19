@@ -4,6 +4,7 @@
 	<script type = "text/javascript">
 	queue = new Queue();
 	timeout = null;
+	leapTimer = null;
 	var count = 0;
 	setInterval(function(){queue.enqueue(count++);}, 4000);
 	</script>
@@ -11,6 +12,11 @@
 <body>
 	<div id = "notification"><p>hi</p></div>
 </body>
+<!--<script>
+var xmlRequest = new XMLHttpRequest();
+xmlRequest.open("GET", "http://192.168.1.138:8080/itv/startURL?url=http://192.168.1.188/overlay.html", true);
+xmlRequest.send();
+</script>-->
 <script type = "text/javascript">
 	function format(str) {
 		var LINE_LENGTH = 40;
@@ -23,15 +29,19 @@
 	}
 
 	function setAutoClear() {
-		time = performance.now();
-		console.log("start time = " + time);
 		timeout = setTimeout(function(){
 			clearNotification();
 		}, 3000);
 	}
 
+	function startLeapMotionListener() {
+		leapTimer = setInterval(function(){
+
+		}, 100);
+	}
+
 	function leapMotionInput() {
-		
+
 	}
 
 	function checkQueue() {
@@ -44,9 +54,8 @@
 			//display = format(display);
 			notification.innerHTML = "display = " + display;
 			var time = performance.now();
-			console.log("start time = " + time);
-			while((performance.now() - time) < 3000);
-			console.log("end time = " + performance.now());
+			setAutoClear();
+			startLeapMotionListener();
 			/*while(3 seconds has not passed and leap motion has not said o stop);
 			if(leap motion says down) {
 				while(leap motion does not say swipe);
