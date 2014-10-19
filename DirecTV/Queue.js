@@ -1,22 +1,22 @@
 //code.stephenmorley.org
 function Queue(){
 	var a=[],b=0;
-	isEmpty=true;
+	empty=true;
 	this.getLength=function(){
 		return a.length-b;
 	};
 	this.isEmpty=function(){
-		return isEmpty;
+		return empty;
 	};
 	this.enqueue=function(b){
 		a.push(b);
-		isEmpty = false;
+		empty = false;
 	};
 	this.dequeue=function(){
 		if(0!=a.length){
 			var c=a[b];
 			2*++b>=a.length&&(a=a.slice(b),b=0);
-			isEmpty = a.length == 0;
+			empty = a.length == 0;
 			return c;
 		}
 	};

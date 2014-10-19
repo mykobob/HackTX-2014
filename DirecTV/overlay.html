@@ -3,6 +3,7 @@
 	<script src = "Queue.js"></script>
 	<script type = "text/javascript">
 	queue = new Queue();
+	timeout = null;
 	var count = 0;
 	setInterval(function(){queue.enqueue(count++);}, 4000);
 	</script>
@@ -15,6 +16,20 @@
 		var LINE_LENGTH = 40;
 		return str;
 	}
+
+	function clearNotification() {
+		var notification = document.getElementId("notification");
+		notification.innerHTML = "";
+	}
+
+	function test() {
+		time = performance.now();
+		console.log("start time = " + time);
+		timeout = setTimeout(function(){
+			clearNotification();
+		}, 3000);
+	}
+
 	function checkQueue() {
 		var notification = document.getElementById("notification");
 		console.log("queue length = " + queue.getLength());
