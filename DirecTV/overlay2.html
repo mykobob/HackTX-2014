@@ -85,7 +85,7 @@
 	<!--<script src = "http://js.leapmotion.com/leap-0.6.0-beta1.min.js"></script>-->
 </head>
 <body>
-	<div id = "notification"><p>Sample Text</p></div>
+	<div id = "notification"></div>
 	<script type = "text/javascript">
 		notification = document.getElementById("notification");
 		notification.style.visibility = "hidden";
@@ -170,7 +170,7 @@
 		function checkQueue() {
 			console.log("queue length = " + queue.getLength());
 			console.log(notification.style.visibility);
-			if(!queue.isEmpty() && notification.style.visibility === "hidden") {
+			if(!queue.isEmpty() && (notification.style.visibility === "hidden" || notification.innerHTML === "")) {
 				var display = queue.dequeue();
 				console.log("display = " + display);
 				//display = format(display);
