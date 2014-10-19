@@ -92,6 +92,7 @@
 		queue = new Queue();
 		timeout = null;
 		var count = 0;
+		setInterval(function(){queue.enqueue(count++);}, 4000);
 
 		function isHorizontal(dx, dy, dz) {
 			return Math.abs(dx) > .75;
