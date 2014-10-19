@@ -139,7 +139,7 @@
 			  		for (var i = frame.gestures.length - 1; i >= 0; i--) {
 			  			var gesture = frame.gestures[i];
 			  			var out = "";
-			  			if(gesture.type === "swipe") {
+			  			if(gesture.type === "swipe" && notification.style.visibility === "visible") {
 			  				var dx = gesture.direction[0];
 			  				var dy = gesture.direction[1];
 			  				var dz = gesture.direction[2];
@@ -151,7 +151,7 @@
 			  				else if (getDirection(dx, dy, dz) === "down") {
 				  				clearTimeout(timeout);
 				  				console.log("autoclear should be off");
-				  				//notification.innerHTML = xpanded_email;
+				  				notification.innerHTML = entire_email;
 			  				}
 						}
 					}
