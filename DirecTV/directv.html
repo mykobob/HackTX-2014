@@ -14,12 +14,12 @@
 				return;
 			}
 			var server = document.getElementById("SERVER_IP").value;
-			match = server.match(/http:\/\/\d+\.\d+\.\d+\.\d+/);
+			match = server.match(/http:\/\/\d+\.\d+\.\d+\.\d+:\d+/);
 			if(match == null) {
 				alert("Server IP isn't an IP address!");
 				return;
 			}
-			sendXMLRequest(tv + "/itv/startURL?url=" + server +"/overlay.html");
+			sendXMLRequest(tv + "/itv/startURL?url=" + server +"/overlay2.html");
 		}
 
 		function stopTV() {

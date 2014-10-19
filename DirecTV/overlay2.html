@@ -1,0 +1,188 @@
+<html>
+<head>
+	<style type="text/css">
+		#notification{
+			-webkit-animation-duration: 1.5s;
+		  	-webkit-animation-name: slidein;
+			/*width: 30%;*/
+		    padding: 1px;
+		    font-family:"Times New Roman";
+		    font-size:150%;
+		    background-color: rgba(150,50,100,.1);
+		   /* border: 5px solid gray;*/
+		    margin: 0;
+		}
+		@-webkit-keyframes slidein
+		{
+			from {
+			    margin-left: 30%;
+			    width: 100%; 
+			}
+
+			to {
+			    margin-left: 0%;
+		  	  	width: 100%;
+			}
+		}
+	 
+		 #rollLeft {
+		 	/*width: 1300px;*/
+		    font-family:"Times New Roman";
+		    font-size:150%;
+		    background-color: rgba(150,50,100,.1);
+		   /* border: 5px solid gray;*/
+		    margin: 0;
+		    -webkit-animation-duration: 1.5s;
+		  	-webkit-animation-name: slideLeft; 	
+		}
+
+		@-webkit-keyframes slideLeft {
+			from {
+				margin-left: 0%;
+				width: 100%;
+			} 
+			to {
+				margin-left: -200%;
+				
+			}
+		}
+
+		#rollRight {
+			/*width: 1300px;*/
+		    font-family:"Times New Roman";
+		    font-size:150%;
+		    background-color: rgba(150,50,100,.1);
+		   /* border: 5px solid gray;*/
+		    margin: 0;
+		    -webkit-animation-duration: 1.5s;
+		  	-webkit-animation-name: slideRight;
+		  }
+	  	
+
+		@-webkit-keyframes slideRight {
+			from {
+				margin-left: 0%;
+				width: 100%;
+			} 
+			to {
+				margin-left: 300%;
+				
+			}
+		}
+
+		#rollDown {
+			/*width: 1300px;*/
+	    	font-family:"Times New Roman";
+	    	font-size:150%;
+	    	background-color: rgba(1,1,1,.9);
+	    	color: white;
+	   		/* border: 5px solid gray;*/
+	    	margin: 0;
+		}	
+	</style>
+
+	<script src = "Queue.js"></script>
+	<!--<script src = "http://js.leapmotion.com/leap-0.6.0-beta1.min.js"></script>-->
+</head>
+<body>
+	<div id = "notification"><p>Sample Text</p></div>
+	<script type = "text/javascript">
+		notification = document.getElementById("notification");
+		//notification.style.visibility = "hidden";
+		queue = new Queue();
+		timeout = null;
+		var count = 0;
+		setInterval(function(){queue.enqueue(count++);}, 4000);
+
+		 function isHorizontal(dx, dy, dz) {
+			return Math.abs(dx) > .75;
+		}
+
+		function getDirection(dx, dy, dz) {
+			if(dy < -.8) {
+				return "down";
+			}
+			else if(isHorizontal(dx, dy, dz)) {
+				return dx > 0 ? "right" : "left";
+			} else {
+				return "invalid direction";
+			}
+		}
+
+		function clearNotification(dx, dy, dz) {
+			if(timeout != null) {
+				clearTimeout(timeout);
+				timeout = null;
+			}
+			notification.innerHTML = "";
+			//console.log(notification.style.visibility);
+			var newName;
+			if(getDirection(dx, dy, dz) === "left") {
+				newName = "rollLeft";
+			}
+			else {
+				newName = "rollRight";
+			}
+			notification.setAttribute("id", newName);
+			setTimeout(function() {
+				notification.setAttribute("id", "notification");
+			}, 1470);
+		}
+
+		/*function runLeapMotion() {
+			var options = {enableGestures: true};
+			Leap.loop(options, function(frame) {
+				// There exists some gestures
+			  	if(frame.gestures.length > 0) {
+			  		for (var i = frame.gestures.length - 1; i >= 0; i--) {
+			  			var gesture = frame.gestures[i];
+			  			if(gesture.type === "swipe" && notification.style.visibility === "visible") {
+			  				var dx = gesture.direction[0];
+			  				var dy = gesture.direction[1];
+			  				var dz = gesture.direction[2];
+			  				console.log("<" + dx + " " + dy + " " + dz + ">")
+			  				if(isHorizontal(dx, dy, dz)) {
+			  					console.log("should be clearing");
+			  					clearNotification(dx, dy, dz);
+			  				}
+			  				else if (getDirection(dx, dy, dz) === "down") {
+				  				clearTimeout(timeout);
+				  				console.log("autoclear should be off");
+				  				notification.innerHTML = entire_email;
+			  				}
+						}
+					}
+				}
+			});
+		}*/
+
+		function format(str) {
+			var LINE_LENGTH = 40;
+			return str;
+		}
+		function setAutoClear() {
+			timeout = setTimeout(function(){
+				clearNotification(-1, 0, 0);
+			}, 5000);
+		}
+
+		function checkQueue() {
+			console.log("queue length = " + queue.getLength());
+			console.log(notification.style.visibility);
+			if(!queue.isEmpty() && notification.innerHTML != "") {
+				var display = queue.dequeue();
+				console.log("display = " + display);
+				//display = format(display);
+				notification.innerHTML = "display = " + display;
+				//notification.style.visibility = "visible";
+				var time = performance.now();
+				setAutoClear();
+			}
+		}
+
+		//runLeapMotion();
+
+		setInterval(function(){checkQueue()}, 6000);
+	</script>
+</body>
+</html>
