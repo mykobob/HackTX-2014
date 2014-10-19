@@ -85,10 +85,10 @@
 	<script src = "http://js.leapmotion.com/leap-0.6.0-beta1.min.js"></script>
 </head>
 <body>
-	<div id = "notification"><p>hi</p></div>
+	<div id = "notification"></div>
 	<script type = "text/javascript">
 		notification = document.getElementById("notification");
-		console.log(notification);
+		notification.style.visibility = "hidden";
 		queue = new Queue();
 		timeout = null;
 		var count = 0;
@@ -126,7 +126,7 @@
 			notification.setAttribute("id", newName);
 			setTimeout(function() {
 				notification.setAttribute("id", "notification");
-			}, 1500);
+			}, 1470);
 		}
 
 		function runLeapMotion() {
@@ -166,14 +166,15 @@
 		function setAutoClear() {
 			timeout = setTimeout(function(){
 				clearNotification(-1, 0, 0);
-			}, 3000);
+			}, 5000);
 		}
 
 		function checkQueue() {
 			console.log("queue length = " + queue.getLength());
+			console.log(notification.style.visibility);
 			if(!queue.isEmpty() && notification.style.visibility === "hidden") {
 				var display = queue.dequeue();
-				//console.log("display = " + display);
+				console.log("display = " + display);
 				//display = format(display);
 				notification.innerHTML = "display = " + display;
 				notification.style.visibility = "visible";
@@ -184,7 +185,7 @@
 
 		runLeapMotion();
 
-		setInterval(function(){checkQueue()}, 5000);
+		setInterval(function(){checkQueue()}, 6000);
 	</script>
 </body>
 </html>
