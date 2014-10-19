@@ -1,5 +1,31 @@
 <html>
 <head>
+	<style type="text/css">
+		#notification{
+			/*width: 30%;*/
+		    padding: 1px;
+		    font-family:"Times New Roman";
+		    font-size:150%;
+		    background-color: rgba(150,50,100,.1);
+		   /* border: 5px solid gray;*/
+		    margin: 0;
+			-webkit-animation-duration: 1.5s;
+		  	-webkit-animation-name: slidein;
+		  	}
+		  	@-webkit-keyframes slidein
+	  	 {
+	  		from {
+		    margin-left: 30%;
+		    width: 50%; 
+		 		 }
+
+			  to {
+			    margin-left: 0%;
+		  	  	width: 100%;
+		  }
+		}	
+	</style>
+
 	<script src = "Queue.js"></script>
 	<script type = "text/javascript">
 	queue = new Queue();
@@ -8,15 +34,63 @@
 	var count = 0;
 	setInterval(function(){queue.enqueue(count++);}, 4000);
 	</script>
+	<script type="text/javascript">
+	function isHorizontal(dx, dy, dz) {
+		return Math.abs(dx) > .75;
+	}
+
+	function getDirection(dx, dy, dz) {
+		if(dy < -.8) {
+			return "down";
+		}
+		else if(isHorizontal(dx, dy, dz)) {
+			return dx > 0 ? "right" : "left";
+		} else {
+			return "invalid direction";
+		}
+	}
+
+	function runLeapMotion() {
+		var notification = document.getElementById("notification");
+		var options = {enableGestures: true};
+		var epsilon = .1;
+		var time = performance.now();
+
+		Leap.loop(options, function(frame) {
+			// There exists some gestures
+		  	if(frame.gestures.length > 0) {
+		  		for (var i = frame.gestures.length - 1; i >= 0; i--) {
+		  			var gesture = frame.gestures[i];
+		  			var out = "";
+		  			if(gesture.type === "swipe") {
+		  				var dx = gesture.direction[0];
+		  				var dy = gesture.direction[1];
+		  				var dz = gesture.direction[2];
+		  				if(isHorizontal(dx, dy, dz)) {
+		  					if(timeout != null) {
+		  						clearTimeout(timeout);
+		  						notification.innerHTML = "";
+		  					}
+		  				}
+		  				else if (getDirection(dx, dy, dz) === "down") {
+		  					clearTimeout(timeout);
+		  					//notification.innerHTML = expanded_email;
+		  				}
+					}
+				}
+			}); 
+		}
+	}
+	</script>
 </head>
 <body>
 	<div id = "notification"><p>hi</p></div>
 </body>
-<!--<script>
-var xmlRequest = new XMLHttpRequest();
-xmlRequest.open("GET", "http://192.168.1.138:8080/itv/startURL?url=http://192.168.1.188/overlay.html", true);
-xmlRequest.send();
-</script>-->
+	<!--<script>
+	var xmlRequest = new XMLHttpRequest();
+	xmlRequest.open("GET", "http://192.168.1.138:8080/itv/startURL?url=http://192.168.1.188/overlay.html", true);
+	xmlRequest.send();
+	</script>-->
 <script type = "text/javascript">
 	function format(str) {
 		var LINE_LENGTH = 40;
@@ -34,16 +108,6 @@ xmlRequest.send();
 		}, 3000);
 	}
 
-	function startLeapMotionListener() {
-		leapTimer = setInterval(function(){
-
-		}, 100);
-	}
-
-	function leapMotionInput() {
-
-	}
-
 	function checkQueue() {
 		var notification = document.getElementById("notification");
 		console.log("queue length = " + queue.getLength());
@@ -55,15 +119,9 @@ xmlRequest.send();
 			notification.innerHTML = "display = " + display;
 			var time = performance.now();
 			setAutoClear();
-			startLeapMotionListener();
-			/*while(3 seconds has not passed and leap motion has not said o stop);
-			if(leap motion says down) {
-				while(leap motion does not say swipe);
-			}//*/
-			//notification.innerHTML = "";
 		}
 	}
 
-	setInterval(function(){checkQueue()}, 5000);
+		setInterval(function(){checkQueue()}, 5000);
 	</script>
-	</html>
+</html>
