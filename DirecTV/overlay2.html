@@ -92,7 +92,8 @@
 		queue = new Queue();
 		timeout = null;
 		var count = 0;
-		setInterval(function(){queue.enqueue(count++);}, 4000);
+		file_counter = 0;
+		entire_email = null;
 
 		function isHorizontal(dx, dy, dz) {
 			return Math.abs(dx) > .75;
@@ -161,10 +162,42 @@
 			var LINE_LENGTH = 40;
 			return str;
 		}
+
 		function setAutoClear() {
 			timeout = setTimeout(function(){
 				clearNotification(-1, 0, 0);
 			}, 5000);
+		}
+
+		function readTextFile(file)
+		{
+		    var rawFile = new XMLHttpRequest();
+		    rawFile.open("GET", file, false);
+		    rawFile.onreadystatechange = function ()
+		    {
+		        if(rawFile.readyState === 4)
+		        {
+		            if(rawFile.status === 200 || rawFile.status == 0)
+		            {
+		                var allText = rawFile.responseText;
+		                var split = allText.split("\n");
+		                var shortText = spit[0] + " " + split[1];
+		                queue.enqueue(shortText.substring(0, Math.min(60, shortText.length));
+		                entire_email = allText;
+		            }
+		        }
+		    }
+		    rawFile.send(null);
+		}
+
+		function checkFile() {
+			var url = "http://192.168.1.200:8080/output" + counter + ".txt";
+			var http = new XMLHttpRequest();
+		    http.open('HEAD', url, false);
+		    http.send();
+		    if(http.status!=404 && entire_email === null) {
+		    	readTextFile("output" + counter++ + ".txt");
+		    }
 		}
 
 		function checkQueue() {
@@ -183,6 +216,7 @@
 
 		//runLeapMotion();
 
+		setInterval(function(){checkFile()}, 3000);
 		setInterval(function(){checkQueue()}, 6000);
 	</script>
 </body>
