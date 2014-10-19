@@ -22,12 +22,16 @@
 		notification.innerHTML = "";
 	}
 
-	function test() {
+	function setAutoClear() {
 		time = performance.now();
 		console.log("start time = " + time);
 		timeout = setTimeout(function(){
 			clearNotification();
 		}, 3000);
+	}
+
+	function leapMotionInput() {
+		
 	}
 
 	function checkQueue() {
