@@ -2,8 +2,8 @@
 <head>
 	<style type="text/css">
 		#notification{
-			-webkit-animation-duration: 1.5s;
-		  	-webkit-animation-name: slidein;
+			/*-webkit-animation-duration: 1.5s;
+		  	-webkit-animation-name: slidein;*/
 			/*width: 30%;*/
 		    padding: 1px;
 		    font-family:"Times New Roman";
@@ -12,7 +12,7 @@
 		   /* border: 5px solid gray;*/
 		    margin: 0;
 		}
-		@-webkit-keyframes slidein
+		/*@-webkit-keyframes slidein
 		{
 			from {
 			    margin-left: 30%;
@@ -26,11 +26,11 @@
 		}
 	 
 		 #rollLeft {
-		 	/*width: 1300px;*/
+		 	/*width: 1300px;
 		    font-family:"Times New Roman";
 		    font-size:400%;
 		    background-color: rgba(255,255,255,.5);
-		   /* border: 5px solid gray;*/
+		   /* border: 5px solid gray;
 		    margin: 0;
 		    -webkit-animation-duration: 1.5s;
 		  	-webkit-animation-name: slideLeft; 	
@@ -48,11 +48,11 @@
 		}
 
 		#rollRight {
-			/*width: 1300px;*/
+			/*width: 1300px;
 		    font-family:"Times New Roman";
 		    font-size:400%;
 		    background-color: rgba(255,255,255,.5);
-		   /* border: 5px solid gray;*/
+		   /* border: 5px solid gray;
 		    margin: 0;
 		    -webkit-animation-duration: 1.5s;
 		  	-webkit-animation-name: slideRight;
@@ -71,14 +71,14 @@
 		}
 
 		#rollDown {
-			/*width: 1300px;*/
+			/*width: 1300px;
 	    	font-family:"Times New Roman";
 	    	font-size:400%;
 	    	background-color: rgba(1,1,1,.9);
 	    	color: white;
-	   		/* border: 5px solid gray;*/
+	   		/* border: 5px solid gray;
 	    	margin: 0;
-		}	
+		}*/	
 	</style>
 
 	<script src = "Queue.js"></script>
@@ -94,7 +94,7 @@
 		var count = 0;
 		setInterval(function(){queue.enqueue(count++);}, 4000);
 
-		 function isHorizontal(dx, dy, dz) {
+		function isHorizontal(dx, dy, dz) {
 			return Math.abs(dx) > .75;
 		}
 
