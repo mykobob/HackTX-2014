@@ -5,18 +5,18 @@
 
 <style type="text/css">
 
-#round{
+#rollIn{
 	width: 1300px;
-    padding: 1px;
     font-family:"Times New Roman";
     font-size:150%;
     background-color: rgba(150,50,100,.1);
    /* border: 5px solid gray;*/
     margin: 0;
 	-webkit-animation-duration: 3s;
-  	-webkit-animation-name: slidein;
-  }
-  	@-webkit-keyframes slidein
+  	-webkit-animation-name: slideIn;
+	
+	}
+  	@-webkit-keyframes slideIn
   	 {
   		from {
 	    margin-left: 100%;
@@ -28,11 +28,84 @@
 	  	  	width: 100%;
 	  }
 	}
+ 
+ #rollLeft {
+ 	width: 1300px;
+    font-family:"Times New Roman";
+    font-size:150%;
+    background-color: rgba(150,50,100,.1);
+   /* border: 5px solid gray;*/
+    margin: 0;
+    -webkit-animation-duration: 3s;
+  	-webkit-animation-name: slideLeft; 	
+}
+
+	@-webkit-keyframes slideLeft {
+		from {
+			margin-left: 0%;
+			width: 100%;
+		} 
+		to {
+			margin-left: -200%;
+			width: 100%;
+		}
+	}
+
+#rollRight {
+	width: 1300px;
+    font-family:"Times New Roman";
+    font-size:150%;
+    background-color: rgba(150,50,100,.1);
+   /* border: 5px solid gray;*/
+    margin: 0;
+    -webkit-animation-duration: 3s;
+  	-webkit-animation-name: slideRight;
+  }
+  	
+
+	@-webkit-keyframes slideRight {
+		from {
+			margin-left: 0%;
+			width: 100%;
+		} 
+		to {
+			margin-left: 300%;
+			width: 100%;
+		}
+	}
+
+#rollDown {
+	width: 1300px;
+    font-family:"Times New Roman";
+    font-size:150%;
+    background-color: rgba(1,1,1,.9);
+    color: white;
+   /* border: 5px solid gray;*/
+    margin: 0;
+}
 	
 </style>
 </head>
 <body>
-<div id="round">The picture abovasdfdsafdsafsdae is 350px wide. The total width of this element is als;dfashjfa sdfdsafdsafdaskl asdhasdjklhdfsjklh asdfjkllfhasdfdsafdsaf hjkasdfl3434522345234562345l</div>
+
+<!-- <div id="rollLeft"></div> -->
+<!-- <div id="rollRight"></div> -->
+<!-- <div id="rollDown"></div> -->
+<div id="rollIn">roll in</div>
+
+<script type="text/javascript">
+rolledIn = false;
+</script>
+
+<script type="text/javascript">
+	function capitalize(str) {
+		return str[0].toUpperCase() + str.slice(1);
+	}
+	
+	var rollIn = document.getElementById("rollIn");
+	rollIn.style.visibility = 'hidden';
+
+</script>
 
 </body>
 </html>
