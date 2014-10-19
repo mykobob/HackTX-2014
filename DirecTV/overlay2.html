@@ -169,8 +169,8 @@
 
 		function checkQueue() {
 			console.log("queue length = " + queue.getLength());
-			console.log(notification.style.visibility);
-			if(!queue.isEmpty() && (notification.style.visibility === "hidden" || notification.innerHTML === "")) {
+			//console.log(notification.style.visibility);
+			if(!queue.isEmpty() && notification.innerHTML==="") {
 				var display = queue.dequeue();
 				console.log("display = " + display);
 				//display = format(display);
